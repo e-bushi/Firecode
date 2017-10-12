@@ -45,10 +45,9 @@ func isNumberMissing(numbers: [Int]) -> (Bool, Int, Int) {
     var checkValue = numbers[0]
     var addthis = checkValue + 1
     
-    ///we are using the a counter to iterate length number of times minus one, to get what array is suppose to sum up to
+    ///we are using the counter to iterate length number of times minus one, to get what the array is suppose to sum up to
     while counter < length {
         checkValue += addthis
-        print(checkValue)
         addthis += 1
         counter += 1
     }
@@ -63,23 +62,26 @@ func isNumberMissing(numbers: [Int]) -> (Bool, Int, Int) {
 }
 
 
-var list = [5, 6, 7, 8, 9, 10]
+var list = [5, 6, 7, 20]
 
-print(isNumberMissing(numbers: list))
 
-func findMissingNumber(numbers: [Int]) -> (Int, String) {
+func findMissingNumber(numbers: inout [Int]) -> String {
+    ///Function returns a list of numbers that were missing from the array that was inputted
     
-    let resultTuple = isNumberMissing(numbers: numbers)
     
-    if resultTuple.0 == false {
+    var resultTuple = isNumberMissing(numbers: numbers)
+    var missingNumbers = [Int]()
+    
+    while resultTuple.0 == false {
         let difference = resultTuple.2 - resultTuple.1
         let missingNumber = numbers.last! - difference
-        return (missingNumber, "Sorry, the number that is missing is \(missingNumber)")
-    } else {
-        return (0, "Great, there are no missing numbers")
+        missingNumbers.append(missingNumber)
+        numbers.insert(missingNumber, at: numbers.count - 1)
+        resultTuple = isNumberMissing(numbers: numbers)
     }
     
+    return "MISSING NUMBERS: \(missingNumbers)"
 }
 
 
-print(findMissingNumber(numbers: list))
+print(findMissingNumber(numbers: &list))
