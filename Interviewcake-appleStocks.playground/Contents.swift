@@ -1,23 +1,27 @@
 //: A UIKit based Playground for presenting user interface
   
 import UIKit
-import PlaygroundSupport
+
 
 //Write an efficient function that takes stock_prices_yesterday and returns the best profit I could have made from 1 purchase and 1 sale of 1 Apple stock yesterday.
 
-class MyViewController : UIViewController {
-    override func loadView() {
-        let view = UIView()
-        view.backgroundColor = .white
+let prices = [10, 7, 5, 8, 11, 9]
+func StockPriceYesterday(prices: [Int]) -> String {
 
-        let label = UILabel()
-        label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-        label.text = "Hello World!"
-        label.textColor = .black
+    let minimum = prices.min()
+    let minIndx = prices.index(of: minimum!)
+
+    let maximum = prices.max()
+    let maxIndx = prices.index(of: maximum!)
+
+    if minIndx! < maxIndx! {
+        return "$\(maximum! - minimum!)"
+    } else {
+        let val = prices.index(of: minimum!)
+        let array = prices[val!...]
         
-        view.addSubview(label)
-        self.view = view
+        return StockPriceYesterday(prices: Array(array))
     }
 }
-// Present the view controller in the Live View window
-PlaygroundPage.current.liveView = MyViewController()
+
+StockPriceYesterday(prices: prices)
