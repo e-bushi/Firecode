@@ -24,4 +24,14 @@ func StockPriceYesterday(prices: [Int]) -> String {
     }
 }
 
-StockPriceYesterday(prices: prices)
+let _one = [10, 7, 5, 8, 11, 9]
+let _two = [8, 11, 32, 210, 1, 9]
+let _three = [20, 7, 82, 8, 12, 30]
+
+let pricesArray = [_one, _two, _three, prices]
+
+DispatchQueue.concurrentPerform(iterations: pricesArray.count) { (i: Int) in
+    var array = pricesArray[i]
+    print(StockPriceYesterday(prices: array))
+}
+

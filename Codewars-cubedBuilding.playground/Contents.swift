@@ -15,7 +15,6 @@ func findNb(_ number: Int) -> Int {
     var sum = 0.0
     repeat {
         sum += pow(Double(x), Double(3))
-        print(sum)
         x += 1
     } while sum < Double(number)
     
@@ -26,6 +25,5 @@ func findNb(_ number: Int) -> Int {
     }
 }
 
-
-
+print(findNb(100))
 
