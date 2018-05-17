@@ -1,23 +1,60 @@
 //: A UIKit based Playground for presenting user interface
   
 import UIKit
-import PlaygroundSupport
 
 //You are given an m x n 2D image matrix (List of Lists) where each integer represents a pixel. Flip it in-place along its horizontal axis.
 
-class MyViewController : UIViewController {
-    override func loadView() {
-        let view = UIView()
-        view.backgroundColor = .white
 
-        let label = UILabel()
-        label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-        label.text = "Hello World!"
-        label.textColor = .black
+struct Matrix<T> {
+    
+    var matrix:[[T]]?
+    var counter = 0
+    
+    public init(matrix: [[T]]) {
+        self.matrix = matrix
+        self.counter = matrix[0].count
+    }
+    
+    public mutating func horizontalFlip() {
+        let arrayIndx = 0
+        var newMatrix = matrix!
         
-        view.addSubview(label)
-        self.view = view
+        for i in 0..<self.counter {
+            matrix![arrayIndx][i] = newMatrix[arrayIndx+1][i]
+            matrix![arrayIndx+1][i] = newMatrix[arrayIndx][i]
+        }
+        
+        
+    }
+    
+    public func realSwap(_ one: inout T, _ two: inout T) {
+        
+        var first = one
+        let holder = two
+        var second = two
+        
+        second = first
+        first = holder
+        
+        one = first
+        two = second
+    }
+    
+}
+
+extension Matrix: CustomStringConvertible {
+    var description: String {
+        let text = "\(matrix!)"
+        
+        return text
     }
 }
-// Present the view controller in the Live View window
-PlaygroundPage.current.liveView = MyViewController()
+
+
+var d = [[0, 0], [1, 1]]
+var matrix = Matrix(matrix: d)
+matrix.horizontalFlip()
+print(matrix)
+
+
+
