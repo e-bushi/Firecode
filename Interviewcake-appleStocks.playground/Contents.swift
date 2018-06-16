@@ -32,6 +32,6 @@ let pricesArray = [_one, _two, _three, prices]
 
 DispatchQueue.concurrentPerform(iterations: pricesArray.count) { (i: Int) in
     var array = pricesArray[i]
-    print(StockPriceYesterday(prices: array))
+    print("Biggest profit = \(StockPriceYesterday(prices: array)): \(i)")
 }
 

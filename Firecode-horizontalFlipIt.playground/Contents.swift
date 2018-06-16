@@ -23,12 +23,9 @@ struct Matrix<T> {
             matrix![arrayIndx][i] = newMatrix[arrayIndx+1][i]
             matrix![arrayIndx+1][i] = newMatrix[arrayIndx][i]
         }
-        
-        
     }
     
     public func realSwap(_ one: inout T, _ two: inout T) {
-        
         var first = one
         let holder = two
         var second = two
@@ -39,7 +36,6 @@ struct Matrix<T> {
         one = first
         two = second
     }
-    
 }
 
 extension Matrix: CustomStringConvertible {
